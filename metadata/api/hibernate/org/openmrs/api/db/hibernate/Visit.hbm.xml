@@ -43,8 +43,7 @@
 			column="patient_id" />
 		<many-to-one name="startReason" class="Concept" not-null="true"
 			column="start_reason" />
-		<many-to-one name="endReason" class="Concept" not-null="true"
-			column="end_reason" />
+		<many-to-one name="endReason" class="Concept" column="end_reason" />
 		<many-to-one name="location" class="Location" not-null="false"
 			column="location_id" />
 		<many-to-one name="creator" class="User" not-null="true" />

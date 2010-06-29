@@ -73,8 +73,13 @@
 		<many-to-one name="provider" class="Person" not-null="true">
 			<column name="provider_id" />
 		</many-to-one>
+		
 		<many-to-one name="voidedBy" class="User">
 			<column name="voided_by" />
+		</many-to-one>
+		
+		<many-to-one name="visit" class="Visit">
+			<column name="visit_id" />
 		</many-to-one>
 
 	</class>
