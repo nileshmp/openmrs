@@ -32,4 +32,6 @@ public interface VisitService extends OpenmrsService {
 	public List<Visit> getVisits(VisitType visitType, Collection<Patient> patients, Collection<Location> locations,
 	                             Date minStartDatetime, Date maxStartDatetime, Date minEndDatetime, Date maxEndDatetime,
 	                             Collection<Concept> startReasons, Collection<Concept> endReasons);
+	
+	public List<Visit> getVisitByPatient(Patient patient);
 }

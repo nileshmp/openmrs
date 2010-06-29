@@ -54,8 +54,11 @@ public class Encounter extends BaseOpenmrsData implements java.io.Serializable {
 	
 	private Set<Obs> obs;
 	
+	private Visit visit;
+
 	// Constructors
 	
+
 	/** default constructor */
 	public Encounter() {
 	}
@@ -80,7 +83,8 @@ public class Encounter extends BaseOpenmrsData implements java.io.Serializable {
 	 * @should have equal encounter objects with no encounter ids
 	 * @should not have equal encounter objects when one has null encounter id
 	 */
-	public boolean equals(Object obj) {
+	@Override
+    public boolean equals(Object obj) {
 		if (obj instanceof Encounter) {
 			Encounter enc = (Encounter) obj;
 			if (this.getEncounterId() != null && enc.getEncounterId() != null)
@@ -101,7 +105,8 @@ public class Encounter extends BaseOpenmrsData implements java.io.Serializable {
 	 * @should have different hash code when not equal
 	 * @should get hash code with null attributes
 	 */
-	public int hashCode() {
+	@Override
+    public int hashCode() {
 		if (this.getEncounterId() == null)
 			return super.hashCode();
 		return this.getEncounterId().hashCode();
@@ -410,9 +415,10 @@ public class Encounter extends BaseOpenmrsData implements java.io.Serializable {
 	
 	/**
 	 * @param provider The provider to set.
-	 * @deprecated use {@link #setProvider(Person)} 
+	 * @deprecated use {@link #setProvider(Person)}
 	 */
-	public void setProvider(User provider) {
+	@Deprecated
+    public void setProvider(User provider) {
 		setProvider(provider.getPerson());
 	}
 	
@@ -473,4 +479,18 @@ public class Encounter extends BaseOpenmrsData implements java.io.Serializable {
 		
 	}
 	
+	/**
+	 * @return the visit
+	 */
+	public Visit getVisit() {
+		return visit;
+	}
+	
+	/**
+	 * @param visit the visit to set
+	 */
+	public void setVisit(Visit visit) {
+		this.visit = visit;
+	}
+
 }

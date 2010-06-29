@@ -62,7 +62,7 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	public void shouldGetVisitsByVisitType() throws Exception {
+	public void getAllVisits_shouldGetVisitsByVisitType() throws Exception {
 		Visit inVisit = new VisitBuilder().withVisitType(VisitType.IN_PATIENT).build();
 		Visit outVisit = new VisitBuilder().withVisitType(VisitType.OUT_PATIENT).build();
 
@@ -76,7 +76,7 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	public void shouldGetVisitsByPatients() throws Exception {
+	public void getAllVisits_shouldGetVisitsByPatients() throws Exception {
 		Patient patient2 = Context.getPatientService().getPatient(2);
 		Visit patient2Visit = new VisitBuilder().withPatient(patient2).build();
 		
@@ -101,7 +101,7 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	public void shouldGetVisitsByLocations() throws Exception {
+	public void getAllVisits_shouldGetVisitsByLocations() throws Exception {
 		Location location1 = Context.getLocationService().getLocation(1);
 		Location location2 = Context.getLocationService().getLocation(2);
 		Location location3 = Context.getLocationService().getLocation(3);
@@ -125,7 +125,7 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	public void shouldGetVisitsByStartReasons() throws Exception {
+	public void getAllVisits_shouldGetVisitsByStartReasons() throws Exception {
 		Concept startReason1 = Context.getConceptService().getConcept(1);
 		Concept startReason2 = Context.getConceptService().getConcept(2);
 		Concept startReason3 = Context.getConceptService().getConcept(3);
@@ -150,7 +150,7 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	public void shouldGetVisitsByEndReasons() throws Exception {
+	public void getAllVisits_shouldGetVisitsByEndReasons() throws Exception {
 		Concept endReason1 = Context.getConceptService().getConcept(1);
 		Concept endReason2 = Context.getConceptService().getConcept(2);
 		Concept endReason3 = Context.getConceptService().getConcept(3);
@@ -174,7 +174,7 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 
 	@Test
-	public void shouldGetVisitsStartedBetweenTheGivenDates() throws Exception {
+	public void getAllVisits_shouldGetVisitsStartedBetweenTheGivenDates() throws Exception {
 		Visit janVisit = new VisitBuilder().withDateStarted(date(1, 1, 2010)).build();
 		Visit febVisit = new VisitBuilder().withDateStarted(date(1, 2, 2010)).build();
 		Visit marchVisit = new VisitBuilder().withDateStarted(date(1, 3, 2010)).build();
@@ -191,7 +191,7 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	public void shouldGetVisitsEndedBetweenTheGivenDates() throws Exception {
+	public void getAllVisits_shouldGetVisitsEndedBetweenTheGivenDates() throws Exception {
 		Visit janVisit = new VisitBuilder().withDateStopped(date(1, 1, 2010)).build();
 		Visit febVisit = new VisitBuilder().withDateStopped(date(1, 2, 2010)).build();
 		Visit marchVisit = new VisitBuilder().withDateStopped(date(1, 3, 2010)).build();
@@ -207,6 +207,27 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 		Assert.assertTrue(visits.contains(febVisit));
 	}
 	
+	@Test
+	public void shouldGetVisitsByPatient() throws Exception {
+		Patient patient2 = Context.getPatientService().getPatient(2);
+		Visit patient2Visit = new VisitBuilder().withPatient(patient2).build();
+		
+		Patient patient6 = Context.getPatientService().getPatient(6);
+		Visit patient6Visit = new VisitBuilder().withPatient(patient6).build();
+		
+		Patient patient7 = Context.getPatientService().getPatient(7);
+		Visit patient7Visit = new VisitBuilder().withPatient(patient7).build();
+		
+		Context.getVisitService().saveVisit(patient2Visit);
+		Context.getVisitService().saveVisit(patient6Visit);
+		Context.getVisitService().saveVisit(patient7Visit);
+		
+		List<Visit> visits = Context.getVisitService().getVisitByPatient(patient2);
+		
+		Assert.assertEquals(1, visits.size());
+		Assert.assertTrue(visits.contains(patient2Visit));
+	}
+
 	/**
 	 * Auto generated method comment
 	 * 

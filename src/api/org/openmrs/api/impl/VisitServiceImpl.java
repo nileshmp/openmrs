@@ -13,6 +13,7 @@
  */
 package org.openmrs.api.impl;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -50,5 +51,13 @@ public class VisitServiceImpl extends BaseOpenmrsService implements VisitService
 	
 	public void setVisitDAO(VisitDAO visitDAO) {
 		this.visitDAO = visitDAO;
+	}
+	
+	/**
+	 * @see org.openmrs.api.VisitService#getVisitByPatient(org.openmrs.Patient)
+	 */
+	@Override
+	public List<Visit> getVisitByPatient(Patient patient) {
+		return getVisitDAO().getVisits(null, Arrays.asList(patient), null, null, null, null, null, null, null);
 	}
 }
