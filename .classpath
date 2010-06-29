@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.launching.macosx.MacOSXType/JVM 1.6.0"/>
 	<classpathentry kind="src" path="src/api"/>
 	<classpathentry kind="src" path="web/WEB-INF"/>
 	<classpathentry kind="src" path="src/web"/>
@@ -87,5 +87,6 @@
 	<classpathentry kind="lib" path="lib/cglib/cglib-nodep-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/spring-framework/com.springsource.org.aopalliance-1.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/checkstyle/checkstyle-all-5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/np/Work/openmrs/lib/hibernate/hibernate-annotations.jar"/>
 	<classpathentry kind="output" path="build/"/>
 </classpath>

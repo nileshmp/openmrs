@@ -13,29 +13,40 @@
 
 		<discriminator column="visit_id" insert="false" />
 
-		<property name="uuid" type="java.lang.String"
-			column="uuid" length="38" unique="true" />
+		<property name="uuid" type="java.lang.String" column="uuid"
+			length="38" unique="true" />
 
-		<property name="dateStarted" type="java.util.Date"
-			column="date_started" length="19" />
-		<property name="dateStopped" type="java.util.Date"
-			column="date_stopped" length="19" />
+		<property name="dateStarted" type="java.util.Date" column="date_started"
+			length="19" />
+		<property name="dateStopped" type="java.util.Date" column="date_stopped"
+			length="19" />
 
-		<property name="dateCreated" type="java.util.Date"
-			column="date_created" not-null="true" length="19" />
+		<property name="dateCreated" type="java.util.Date" column="date_created"
+			not-null="true" length="19" />
 		<property name="voided" type="java.lang.Boolean" column="voided"
 			length="1" not-null="true" />
-		<property name="dateVoided" type="java.util.Date"
-			column="date_voided" length="19" />
-		<property name="voidReason" type="java.lang.String"
-			column="void_reason" length="255" />
+		<property name="dateVoided" type="java.util.Date" column="date_voided"
+			length="19" />
+		<property name="voidReason" type="java.lang.String" column="void_reason"
+			length="255" />
+
+		<property name="visitType" column="visit_type" length="255">
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">org.openmrs.VisitType</param>
+				<param name="type">12</param>
+			</type>
+		</property>
 
 		<!-- Associations -->
 
-		<many-to-one name="person" class="Person" not-null="true" column="person_id" />
-		<many-to-one name="startReason" class="Concept" not-null="true" column="start_reason" />
-		<many-to-one name="endReason" class="Concept" not-null="true" column="end_reason" />
-		<many-to-one name="location" class="Location" not-null="false" column="location_id" />
+		<many-to-one name="patient" class="Patient" not-null="true"
+			column="patient_id" />
+		<many-to-one name="startReason" class="Concept" not-null="true"
+			column="start_reason" />
+		<many-to-one name="endReason" class="Concept" not-null="true"
+			column="end_reason" />
+		<many-to-one name="location" class="Location" not-null="false"
+			column="location_id" />
 		<many-to-one name="creator" class="User" not-null="true" />
 		<many-to-one name="voidedBy" class="User" column="voided_by" />
 

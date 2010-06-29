@@ -8,5 +8,5 @@ package org.openmrs;
  * To change this template use File | Settings | File Templates.
  */
 public enum VisitType {
-    IN_PATIENT
+	IN_PATIENT, OUT_PATIENT
 }

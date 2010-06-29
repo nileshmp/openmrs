@@ -33,7 +33,7 @@ public class Visit extends BaseOpenmrsData implements Auditable {
 	
 	private Integer visitId;
 	
-	private Person person;
+	private Patient patient;
 	
 	public Integer getId() {
 		return getVisitId();
@@ -81,8 +81,8 @@ public class Visit extends BaseOpenmrsData implements Auditable {
 		return visitId;
 	}
 	
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 	
 	public void setVisitId(Integer visitId) {
@@ -109,8 +109,8 @@ public class Visit extends BaseOpenmrsData implements Auditable {
 		return visitType;
 	}
 	
-	public Person getPerson() {
-		return person;
+	public Patient getPatient() {
+		return patient;
 	}
 	
 	public Location getLocation() {

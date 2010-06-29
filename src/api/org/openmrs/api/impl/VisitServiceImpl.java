@@ -13,9 +13,15 @@
  */
 package org.openmrs.api.impl;
 
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
+import org.openmrs.Concept;
+import org.openmrs.Location;
+import org.openmrs.Patient;
 import org.openmrs.Visit;
+import org.openmrs.VisitType;
 import org.openmrs.api.VisitService;
 import org.openmrs.api.db.hibernate.VisitDAO;
 
@@ -27,6 +33,13 @@ public class VisitServiceImpl extends BaseOpenmrsService implements VisitService
 		return getVisitDAO().getAllVisits();
 	}
 	
+	public List<Visit> getVisits(VisitType visitType, Collection<Patient> patients, Collection<Location> locations,
+	                             Date minStartDatetime, Date maxStartDatetime, Date minEndDatetime, Date maxEndDatetime,
+	                             Collection<Concept> startReasons, Collection<Concept> endReasons) {
+		return getVisitDAO().getVisits(visitType, patients, locations, minStartDatetime, maxStartDatetime, minEndDatetime,
+		    maxEndDatetime, startReasons, endReasons);
+	}
+
 	public Visit saveVisit(Visit visit) {
 		return getVisitDAO().saveVisit(visit);
 	}

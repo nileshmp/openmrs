@@ -13,9 +13,15 @@
  */
 package org.openmrs.api.db.hibernate;
 
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
+import org.openmrs.Concept;
+import org.openmrs.Location;
+import org.openmrs.Patient;
 import org.openmrs.Visit;
+import org.openmrs.VisitType;
 import org.openmrs.api.db.DAOException;
 
 public interface VisitDAO {
@@ -28,4 +34,13 @@ public interface VisitDAO {
 	 * @return visits
 	 */
 	List<Visit> getAllVisits();
+	
+	/**
+	 * Auto generated method comment
+	 * 
+	 * @return
+	 */
+	List<Visit> getVisits(VisitType visitType, Collection<Patient> patients, Collection<Location> locations,
+	                      Date minStartDatetime, Date maxStartDatetime, Date minEndDatetime, Date maxEndDatetime,
+	                      Collection<Concept> startReasons, Collection<Concept> endReasons);
 }
