@@ -162,6 +162,7 @@ public interface EncounterService extends OpenmrsService {
 	 * @should get encounters by provider
 	 * @should exclude voided encounters
 	 * @should include voided encounters
+	 * @should get encounters by visits
 	 */
 	@Transactional(readOnly = true)
 	@Authorized( { OpenmrsConstants.PRIV_VIEW_ENCOUNTERS })
@@ -569,6 +570,13 @@ public interface EncounterService extends OpenmrsService {
 	@Authorized( { OpenmrsConstants.PRIV_VIEW_ENCOUNTERS })
 	public List<Encounter> getEncountersByPatient(String query) throws APIException;
 	
+	/**
+	 * Search for encounters by Visit
+	 * 
+	 * @param visit
+	 * @return list of encounters filtered based on visit
+	 * @throws APIException
+	 */
 	public List<Encounter> getEncountersByVisit(Visit visit) throws APIException;
 
 }

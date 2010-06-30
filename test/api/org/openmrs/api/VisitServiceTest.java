@@ -42,6 +42,7 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 
 	@Test
+	@Verifies(value = "should save visit", method = "saveVisit(visit)")
 	public void saveVisit_shouldSaveVisit() throws Exception {
 		Visit visit = new VisitBuilder().build();
 		Visit savedVisit = Context.getVisitService().saveVisit(visit);
@@ -49,9 +50,6 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 		Assert.assertNotNull(savedVisit.getId());
 	}
 	
-	/**
-	 * @see {@link VisitService#getAllVisits()}
-	 */
 	@Test
 	@Verifies(value = "should get all visits", method = "getAllVisits()")
 	public void getAllVisits_shouldGetAllVisits() throws Exception {
@@ -62,7 +60,8 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	public void getAllVisits_shouldGetVisitsByVisitType() throws Exception {
+	@Verifies(value = "should get visits by visit type", method = "getVisits(VisitType, Collection<Patient>,Collection<Location>,Date,Date,Date,Date,Collection<Concept>,Collection<Concept>)")
+	public void getVisits_shouldGetVisitsByVisitType() throws Exception {
 		Visit inVisit = new VisitBuilder().withVisitType(VisitType.IN_PATIENT).build();
 		Visit outVisit = new VisitBuilder().withVisitType(VisitType.OUT_PATIENT).build();
 
@@ -76,7 +75,8 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	public void getAllVisits_shouldGetVisitsByPatients() throws Exception {
+	@Verifies(value = "should get visits by patients", method = "getVisits(VisitType, Collection<Patient>,Collection<Location>,Date,Date,Date,Date,Collection<Concept>,Collection<Concept>)")
+	public void getVisits_shouldGetVisitsByPatients() throws Exception {
 		Patient patient2 = Context.getPatientService().getPatient(2);
 		Visit patient2Visit = new VisitBuilder().withPatient(patient2).build();
 		
@@ -101,7 +101,8 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	public void getAllVisits_shouldGetVisitsByLocations() throws Exception {
+	@Verifies(value = "should get visits by locations", method = "getVisits(VisitType, Collection<Patient>,Collection<Location>,Date,Date,Date,Date,Collection<Concept>,Collection<Concept>)")
+	public void getVisits_shouldGetVisitsByLocations() throws Exception {
 		Location location1 = Context.getLocationService().getLocation(1);
 		Location location2 = Context.getLocationService().getLocation(2);
 		Location location3 = Context.getLocationService().getLocation(3);
@@ -125,6 +126,7 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
+	@Verifies(value = "should get visits by start reasons", method = "getVisits(VisitType, Collection<Patient>,Collection<Location>,Date,Date,Date,Date,Collection<Concept>,Collection<Concept>)")
 	public void getAllVisits_shouldGetVisitsByStartReasons() throws Exception {
 		Concept startReason1 = Context.getConceptService().getConcept(1);
 		Concept startReason2 = Context.getConceptService().getConcept(2);

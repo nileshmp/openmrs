@@ -25,8 +25,22 @@ import org.openmrs.VisitType;
 
 
 public interface VisitService extends OpenmrsService {
-    public List<Visit> getAllVisits();
-
+	
+	/**
+	 * Get all visits
+	 * 
+	 * @should get all visits
+	 * @return List of all visits
+	 */
+	public List<Visit> getAllVisits();
+	
+	/**
+	 * Saves the given visit
+	 * 
+	 * @param visit
+	 * @should save visit
+	 * @return saved visit
+	 */
     public Visit saveVisit(Visit visit);
 	
 	public List<Visit> getVisits(VisitType visitType, Collection<Patient> patients, Collection<Location> locations,
