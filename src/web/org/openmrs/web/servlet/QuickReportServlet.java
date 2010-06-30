@@ -51,7 +51,8 @@ public class QuickReportServlet extends HttpServlet {
 	
 	private Log log = LogFactory.getLog(this.getClass());
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		
 		String reportType = request.getParameter("reportType");
@@ -225,10 +226,10 @@ public class QuickReportServlet extends HttpServlet {
 		Collection<Encounter> encounters = null;
 		
 		if (location == null || location.equals(""))
-			encounters = es.getEncounters(null, null, start, end, null, null, null, true);
+			encounters = es.getEncounters(null, null, start, end, null, null, null, true, null);
 		else {
 			Location locationObj = ls.getLocation(Integer.valueOf(location));
-			encounters = es.getEncounters(null, locationObj, start, end, null, null, null, true);
+			encounters = es.getEncounters(null, locationObj, start, end, null, null, null, true, null);
 		}
 		
 		if (encounters != null) {
