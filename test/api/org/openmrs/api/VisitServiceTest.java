@@ -51,7 +51,7 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	@Verifies(value = "should get all visits", method = "getAllVisits()")
+	@Verifies(value = "should get all visits", method = "getVisits()")
 	public void getAllVisits_shouldGetAllVisits() throws Exception {
 		Context.getVisitService().saveVisit(new VisitBuilder().build());
 		Context.getVisitService().saveVisit(new VisitBuilder().build());
@@ -127,7 +127,7 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	
 	@Test
 	@Verifies(value = "should get visits by start reasons", method = "getVisits(VisitType, Collection<Patient>,Collection<Location>,Date,Date,Date,Date,Collection<Concept>,Collection<Concept>)")
-	public void getAllVisits_shouldGetVisitsByStartReasons() throws Exception {
+	public void getVisits_shouldGetVisitsByStartReasons() throws Exception {
 		Concept startReason1 = Context.getConceptService().getConcept(1);
 		Concept startReason2 = Context.getConceptService().getConcept(2);
 		Concept startReason3 = Context.getConceptService().getConcept(3);
@@ -152,7 +152,8 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	public void getAllVisits_shouldGetVisitsByEndReasons() throws Exception {
+	@Verifies(value = "should get visits by end reasons", method = "getVisits(VisitType, Collection<Patient>,Collection<Location>,Date,Date,Date,Date,Collection<Concept>,Collection<Concept>)")
+	public void getVisits_shouldGetVisitsByEndReasons() throws Exception {
 		Concept endReason1 = Context.getConceptService().getConcept(1);
 		Concept endReason2 = Context.getConceptService().getConcept(2);
 		Concept endReason3 = Context.getConceptService().getConcept(3);
@@ -176,7 +177,8 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 
 	@Test
-	public void getAllVisits_shouldGetVisitsStartedBetweenTheGivenDates() throws Exception {
+	@Verifies(value = "should get visits started between the given dates", method = "getVisits(VisitType, Collection<Patient>,Collection<Location>,Date,Date,Date,Date,Collection<Concept>,Collection<Concept>)")
+	public void getVisits_shouldGetVisitsStartedBetweenTheGivenDates() throws Exception {
 		Visit janVisit = new VisitBuilder().withDateStarted(date(1, 1, 2010)).build();
 		Visit febVisit = new VisitBuilder().withDateStarted(date(1, 2, 2010)).build();
 		Visit marchVisit = new VisitBuilder().withDateStarted(date(1, 3, 2010)).build();
@@ -193,7 +195,8 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	public void getAllVisits_shouldGetVisitsEndedBetweenTheGivenDates() throws Exception {
+	@Verifies(value = "should get visits ended between the given dates", method = "getVisits(VisitType, Collection<Patient>,Collection<Location>,Date,Date,Date,Date,Collection<Concept>,Collection<Concept>)")
+	public void getVisits_shouldGetVisitsEndedBetweenTheGivenDates() throws Exception {
 		Visit janVisit = new VisitBuilder().withDateStopped(date(1, 1, 2010)).build();
 		Visit febVisit = new VisitBuilder().withDateStopped(date(1, 2, 2010)).build();
 		Visit marchVisit = new VisitBuilder().withDateStopped(date(1, 3, 2010)).build();
@@ -210,7 +213,8 @@ public class VisitServiceTest extends BaseContextSensitiveTest {
 	}
 	
 	@Test
-	public void shouldGetVisitsByPatient() throws Exception {
+	@Verifies(value = "should get visits by patient", method = "getVisitByPatient(Patient)")
+	public void getVisitByPatient_shouldGetVisitsByPatient() throws Exception {
 		Patient patient2 = Context.getPatientService().getPatient(2);
 		Visit patient2Visit = new VisitBuilder().withPatient(patient2).build();
 		

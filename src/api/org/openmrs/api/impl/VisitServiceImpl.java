@@ -30,10 +30,20 @@ public class VisitServiceImpl extends BaseOpenmrsService implements VisitService
 	
 	private VisitDAO visitDAO;
 	
+	/**
+	 * @see org.openmrs.api.VisitService#getAllVisits()
+	 */
+	@Override
 	public List<Visit> getAllVisits() {
 		return getVisitDAO().getAllVisits();
 	}
 	
+	/**
+	 * @see org.openmrs.api.VisitService#getVisits(org.openmrs.VisitType, java.util.Collection,
+	 *      java.util.Collection, java.util.Date, java.util.Date, java.util.Date, java.util.Date,
+	 *      java.util.Collection, java.util.Collection)
+	 */
+	@Override
 	public List<Visit> getVisits(VisitType visitType, Collection<Patient> patients, Collection<Location> locations,
 	                             Date minStartDatetime, Date maxStartDatetime, Date minEndDatetime, Date maxEndDatetime,
 	                             Collection<Concept> startReasons, Collection<Concept> endReasons) {
@@ -41,16 +51,12 @@ public class VisitServiceImpl extends BaseOpenmrsService implements VisitService
 		    maxEndDatetime, startReasons, endReasons);
 	}
 
+	/**
+	 * @see org.openmrs.api.VisitService#saveVisit(org.openmrs.Visit)
+	 */
+	@Override
 	public Visit saveVisit(Visit visit) {
 		return getVisitDAO().saveVisit(visit);
-	}
-	
-	public VisitDAO getVisitDAO() {
-		return visitDAO;
-	}
-	
-	public void setVisitDAO(VisitDAO visitDAO) {
-		this.visitDAO = visitDAO;
 	}
 	
 	/**
@@ -60,4 +66,13 @@ public class VisitServiceImpl extends BaseOpenmrsService implements VisitService
 	public List<Visit> getVisitByPatient(Patient patient) {
 		return getVisitDAO().getVisits(null, Arrays.asList(patient), null, null, null, null, null, null, null);
 	}
+
+	public VisitDAO getVisitDAO() {
+		return visitDAO;
+	}
+	
+	public void setVisitDAO(VisitDAO visitDAO) {
+		this.visitDAO = visitDAO;
+	}
+	
 }

@@ -37,15 +37,43 @@ public interface VisitService extends OpenmrsService {
 	/**
 	 * Saves the given visit
 	 * 
-	 * @param visit
 	 * @should save visit
+	 * @param visit
 	 * @return saved visit
 	 */
     public Visit saveVisit(Visit visit);
 	
+	/**
+	 * Get visits based on the input parameters.
+	 * 
+	 * @should get visits by visit type
+	 * @should get visits by patients
+	 * @should get visits by locations
+	 * @should get visits by start reasons
+	 * @should get visits by end reasons
+	 * @should get visits started between the given dates
+	 * @should get visits ended between the given dates
+	 * @param visitType
+	 * @param patients
+	 * @param locations
+	 * @param minStartDatetime
+	 * @param maxStartDatetime
+	 * @param minEndDatetime
+	 * @param maxEndDatetime
+	 * @param startReasons
+	 * @param endReasons
+	 * @return
+	 */
 	public List<Visit> getVisits(VisitType visitType, Collection<Patient> patients, Collection<Location> locations,
 	                             Date minStartDatetime, Date maxStartDatetime, Date minEndDatetime, Date maxEndDatetime,
 	                             Collection<Concept> startReasons, Collection<Concept> endReasons);
 	
+	/**
+	 * Gets list of visits by patient.
+	 * 
+	 * @should get visits by patient
+	 * @param patient
+	 * @return
+	 */
 	public List<Visit> getVisitByPatient(Patient patient);
 }
