@@ -148,6 +148,8 @@ table#labTestTable th {
 				<openmrs:globalProperty var="colorCritical" key="graph.color.critical"/>
 				
 					$j.getJSON("patientGraphJson.form?patientId=${patient.patientId}&conceptId=${conceptId}", function(json){
+
+						  var container = $j('#conceptBox-${conceptId}');
 						  var plot = $j.plot($j('#conceptBox-${conceptId}'),
 						  [
 						  {
@@ -202,14 +204,41 @@ table#labTestTable th {
 							return { min:arr[0],max:arr[arr.length-1]};
 						  }
 						  
-						  function showToolTip(x,y,contents){
-						  	alert("showing tooltip");
-						  }	
+					      function showTooltip(x, y, contents) {
+					        $j('<div id="tooltip">' + contents + '</div>').css( {
+					            position: 'absolute',
+					            display: 'none',
+					            top: y + 5,
+					            left: x + 5,
+					            border: '1px solid #fdd',
+					            padding: '2px',
+					            'background-color': '#fee',
+					            opacity: 0.80
+					        }).appendTo("body").fadeIn(200);
+					      }
+
 						
-						  $('#conceptBox-${conceptId}').bind("plotclick", function (event, pos, item) {
-						  	showToolTip();
-						  	plot.highlight(item.series, item.datapoint);
-						  });
+						   $j(container).bind("plothover", function (event, pos, item) {
+					            if (item) {
+					                if (previousPoint != item.datapoint) {
+					                    previousPoint = item.datapoint;
+					                    
+					                    $j("#tooltip").remove();
+					                    var x = item.datapoint[0],
+					                        y = item.datapoint[1];
+					                   
+					                    var obsdate = new Date(x);
+					                    
+					                    showTooltip(item.pageX, item.pageY,
+					                    		 y + " on " + obsdate.toLocaleDateString());
+					                }
+					            }
+					            else {
+					                $j("#tooltip").remove();
+					                previousPoint = null;            
+					            }
+						    });
+
 					}
 					);
 					
