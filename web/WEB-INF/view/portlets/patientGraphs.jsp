@@ -86,6 +86,7 @@ table#labTestTable th {
 								limit="-1"
 							/>
 						</div>
+						
 					</c:if>
 				</td>
 			</tr>
@@ -94,9 +95,13 @@ table#labTestTable th {
 					<tr>
 						<td>
 						<div>
+						<div align="center">
+						    ${userConcepts} over time
+							<a id="togglegraph-${conceptId}">Hide Graph</a>
+						</div>
 						<div  style="margin: 0pt auto; height: 300px; width: 600px; align: center" align="center" id="conceptBox-${conceptId}"><spring:message
 							code="general.loading" /></div>
-						<div align="center">
+						<div id="labTestTable-${conceptId}" align="center">
 						<div style="width: 750px; overflow: auto; border: 1px solid black;">
 		
 						<openmrs:obsTable observations="${model.patientObs}"
@@ -112,7 +117,6 @@ table#labTestTable th {
 							code="general.remove" /></a> <br />
 						<br />
 						</div>
-		
 						</div>
 		
 		
@@ -141,15 +145,22 @@ table#labTestTable th {
 	
 	<script type="text/javascript">
 		function loadGraphs() {
+		
 			<c:forEach items="${fn:split(graphConceptString, '-')}" var="conceptId">
 				<c:if test="${conceptId != ''}">
 				<openmrs:globalProperty var="colorAbsolute" key="graph.color.absolute"/>
 				<openmrs:globalProperty var="colorNormal" key="graph.color.normal"/>
 				<openmrs:globalProperty var="colorCritical" key="graph.color.critical"/>
+
+					
+					$j('#togglegraph-${conceptId}').click(function(){
+						$j('#conceptBox-${conceptId}').toggle();
+						$j('#labTestTable-${conceptId}').toggle();
+						$j('#togglegraph-${conceptId}').text($j('#conceptBox-${conceptId}').is(':visible') ? 'Hide Graph': 'Show Graph');
+					});
 				
 					$j.getJSON("patientGraphJson.form?patientId=${patient.patientId}&conceptId=${conceptId}", function(json){
 
-						  var container = $j('#conceptBox-${conceptId}');
 						  var plot = $j.plot($j('#conceptBox-${conceptId}'),
 						  [
 						  {
@@ -218,7 +229,7 @@ table#labTestTable th {
 					      }
 
 						
-						   $j(container).bind("plothover", function (event, pos, item) {
+						   $j('#conceptBox-${conceptId}').bind("plothover", function (event, pos, item) {
 					            if (item) {
 					                if (previousPoint != item.datapoint) {
 					                    previousPoint = item.datapoint;
@@ -248,4 +259,5 @@ table#labTestTable th {
 		}
 		window.setTimeout(loadGraphs, 1000);
 	</script>
+	
 	
